@@ -5,6 +5,8 @@ import com.assistant.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class PostService {
@@ -18,8 +20,9 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public void updatePost(Long id, Post post) {
-        post.update(post);
+    public void updatePost(Long id, Post updatePost) {
+        Optional<Post> currentPost = postRepository.findById(id);
+        currentPost.ifPresent(cPost -> cPost.update(updatePost));
     }
 
     public void deletePost(Long postId) {
