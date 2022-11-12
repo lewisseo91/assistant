@@ -11,7 +11,7 @@ public class Post {
         this.title = title;
     }
 
-    public Post create(Long id, Long authorId, String title) {
+    public static Post create(Long id, Long authorId, String title) {
         return new Post(id, authorId, title);
     }
 

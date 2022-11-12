@@ -11,9 +11,8 @@ public class PostTest {
         Long id = 1L;
         Long authorId = 1L;
         String title = "타이틀1";
-        Post post = new Post(id, authorId, title);
 
-        post.create(id, authorId, title);
+        Post post = Post.create(id, authorId, title);
 
         assertEquals(title, post.getTitle());
     }
