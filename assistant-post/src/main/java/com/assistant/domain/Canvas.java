@@ -25,6 +25,14 @@ public class Canvas {
         return new Canvas(id);
     }
 
+    public static Canvas create(Long id, List<Long> shapes) {
+        return new Canvas(id, shapes, new ArrayList<>());
+    }
+
+    public void deleteShape(Long shapeId) {
+        this.shapes.remove(shapeId);
+    }
+
     public Long getCanvasId() {
         return canvasId;
     }

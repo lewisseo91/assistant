@@ -26,21 +26,6 @@ public class CanvasTest {
         assertEquals(updatedCanvas.getShapes(), updateShapes);
         assertEquals(updatedCanvas.getContents(), updateContents);
     }
-//
-//    @Test
-//    public void 캔버스는_쉐입을_등록할수_있다() {
-//        Long id = 1L;
-//        Canvas canvas = Canvas.create(id);
-//        assertEquals(title, post.getTitle());
-//    }
-//
-//    @Test
-//    public void 캔버스는_쉐입을_삭제할수_있다() {
-//        Long id = 1L;
-//        Canvas canvas = Canvas.create(id);
-//        assertEquals(title, post.getTitle());
-//    }
-//
 //    @Test
 //    public void 캔버스는_컨텐트를_등록할수_있다() {
 //        Long id = 1L;
