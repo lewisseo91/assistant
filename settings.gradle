@@ -1,1 +1,7 @@
-rootProject.name = 'demo'
+rootProject.name = 'assistant'
+include 'assistant-post'
+include 'assistant-user'
+include 'assistant-auth'
+include 'assistant-payment'
+include 'assistant-api-gateway'
+

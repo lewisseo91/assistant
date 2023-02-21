@@ -5,10 +5,6 @@ plugins {
 	id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
 repositories {
 	mavenCentral()
 }
@@ -17,15 +13,35 @@ ext {
 	set('snippetsDir', file("build/generated-snippets"))
 }
 
-dependencies {
-	implementation 'com.h2database:h2'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
+subprojects {
+	group = 'com.assistant'
+	version = '0.0.1'
+	sourceCompatibility = '11'
+
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'org.asciidoctor.convert'
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation 'com.h2database:h2'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.boot:spring-boot-starter-webflux'
+		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'io.projectreactor:reactor-test'
+		testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
+	}
+}
+
+project(':assistant-post') {
+	dependencies {
+	}
 }
 
 tasks.named('test') {
