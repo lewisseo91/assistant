@@ -1,6 +1,5 @@
 package com.assistant.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Shape {
@@ -18,5 +17,13 @@ public class Shape {
 
     public Long getShapeId() {
         return this.shapeId;
+    }
+
+    public List<Long> getPoints() {
+        return this.points;
+    }
+
+    public void delete() {
+        this.points.clear();
     }
 }

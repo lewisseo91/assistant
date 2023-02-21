@@ -53,5 +53,37 @@ class ShapeTest {
         assertEquals(canvas.getShapes().size(), 0);
     }
 
+    @DisplayName(value = "쉐입이 생성될 때 포인트가 생성된다 (쉐입 등록과 동시에)")
+    @Test
+    public void 쉐입을_생성될때_포인트가_생성된다() {
+        Long shapeId = 1L;
+        Point point1 = Point.create(1L, 0L, 100L);
+        Point point2 = Point.create(2L, 1L, 100L);
+        List<Long> points = List.of(point1.getPointId(), point2.getPointId());
+        Shape shape = Shape.create(shapeId, points);
+
+        assertEquals(shape.getPoints().size(), 2);
+    }
+
+    @DisplayName(value = "쉐입이 삭제될 때 포인트도 삭제된다")
+    @Test
+    public void 쉐입을_생성될때_포인트가_삭제된다() {
+        Long shapeId = 1L;
+        List<Long> points = new ArrayList<>();
+        Point point1 = Point.create(1L, 0L, 100L);
+        Point point2 = Point.create(2L, 1L, 100L);
+        points.add(point1.getPointId());
+        points.add(point2.getPointId());
+        Shape shape = Shape.create(shapeId, points);
+
+        Long canvasId = 1L;
+        List<Long> shapes = new ArrayList<>();
+        shapes.add(shape.getShapeId());
+        Canvas canvas = Canvas.create(canvasId, shapes);
+
+        canvas.deleteShape(shape.getShapeId());
+        shape.delete(); // 나중에 간접 연결 구조라면 id로 조회 후 삭제 필요
+        assertEquals(shape.getPoints().size(), 0);
+    }
 
 }
