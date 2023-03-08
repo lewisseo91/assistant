@@ -4,12 +4,16 @@ import com.assistant.domain.Post;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 
+@DataJpaTest
+@Import(PostService.class)
 class PostServiceTest {
     @Autowired
     private PostService postService;
 
-    private Long postId = 1L;
+    private final Long postId = 1L;
     private Post 글_1번;
     private Post 수정글_1번;
 
@@ -35,6 +39,15 @@ class PostServiceTest {
 
     @Test
     public void 삭제한다() {
-        postService.deletePost(postId);
+        //when
+        postService.deletePost(글_1번);
+    }
+
+    @Test
+    public void 삭제한다_2() {
+        postService.savePost(글_1번);
+
+        //when
+        postService.deletePost(글_1번.getPostId());
     }
 }

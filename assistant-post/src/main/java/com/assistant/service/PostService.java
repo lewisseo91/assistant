@@ -25,6 +25,10 @@ public class PostService {
         currentPost.ifPresent(cPost -> cPost.update(updatePost));
     }
 
+    public void deletePost(Post post) {
+        postRepository.delete(post);
+    }
+
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
