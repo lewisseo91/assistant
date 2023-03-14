@@ -2,6 +2,7 @@ package com.assistant.service;
 
 import com.assistant.domain.Post;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -30,6 +31,12 @@ class PostServiceTest {
     @Test
     public void 등록한다() {
         postService.savePost(글_1번);
+    }
+
+    @Test
+    @DisplayName("포스트는 하나 이상의 캔버스를 포함한다.")
+    public void 포스트를_등록하면_하나_이상의_캔버스를_포함한다() {
+//        postService.savePost(글_1번);
     }
 
     @Test
