@@ -36,4 +36,36 @@ class PostControllerTest {
                 .expectStatus().isOk()
                 .expectBody(Void.class);
     }
+
+    @Test
+    @DisplayName("포스트 수정이 된다.")
+    public void 포스트를_수정한다() throws Exception {
+        // given
+        포스트를_저장한다();
+
+        PostRequest 포스트_1번 = new PostRequest(1L, 1L, "1번포스트_수정");
+
+        webTestClient.put()
+                .uri("/post/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(포스트_1번)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Void.class);
+    }
+
+    @Test
+    @DisplayName("포스트 삭제가 된다.")
+    public void 포스트를_삭제한다() throws Exception {
+        // given
+        포스트를_저장한다();
+
+        long id = 1L;
+
+        webTestClient.delete()
+                .uri("/post/delete/" + id)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Void.class);
+    }
 }

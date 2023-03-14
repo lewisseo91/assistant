@@ -20,5 +20,15 @@ public class PostController {
         return Mono.fromRunnable(() -> postService.savePost(postRequest.to()));
     }
 
+    @PutMapping("/update")
+    public Mono<Void> updatePost(@RequestBody PostRequest postRequest) {
+        return Mono.fromRunnable(() -> postService.updatePost(postRequest.getId(), postRequest.to()));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Mono<Void> deletePost(@PathVariable Long id) {
+        return Mono.fromRunnable(() -> postService.deletePost(id));
+    }
+
 
 }
