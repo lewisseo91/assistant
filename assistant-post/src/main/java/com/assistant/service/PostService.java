@@ -1,7 +1,11 @@
 package com.assistant.service;
 
 import com.assistant.domain.Post;
+import com.assistant.dto.PostCreateRequest;
+import com.assistant.dto.PostDeleteRequest;
+import com.assistant.dto.PostUpdateRequest;
 import com.assistant.repository.PostRepository;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,22 +15,25 @@ import java.util.Optional;
 @Transactional
 public class PostService {
     private final PostRepository postRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository, ApplicationEventPublisher applicationEventPublisher) {
         this.postRepository = postRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    public void savePost(Post post) {
+    public void savePost(PostCreateRequest postCreateRequest) {
+        Post post = Post.create(postCreateRequest.getId(), postCreateRequest.getAuthorId(), postCreateRequest.getTitle());
         postRepository.save(post);
     }
 
-    public void updatePost(Long id, Post updatePost) {
+    public void updatePost(Long id, PostUpdateRequest updatePostRequest) {
         Optional<Post> currentPost = postRepository.findById(id);
-        currentPost.ifPresent(cPost -> cPost.update(updatePost));
+        currentPost.ifPresent(cPost -> cPost.update(updatePostRequest.getId(), updatePostRequest.getAuthorId(), updatePostRequest.getTitle()));
     }
 
-    public void deletePost(Post post) {
-        postRepository.delete(post);
+    public void deletePost(PostDeleteRequest postDeleteRequest) {
+        postRepository.deleteById(postDeleteRequest.getId());
     }
 
     public void deletePost(Long postId) {

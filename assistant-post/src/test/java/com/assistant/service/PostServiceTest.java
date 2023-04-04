@@ -1,6 +1,9 @@
 package com.assistant.service;
 
 import com.assistant.domain.Post;
+import com.assistant.dto.PostCreateRequest;
+import com.assistant.dto.PostDeleteRequest;
+import com.assistant.dto.PostUpdateRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +18,9 @@ class PostServiceTest {
     private PostService postService;
 
     private final Long postId = 1L;
-    private Post 글_1번;
-    private Post 수정글_1번;
+    private PostCreateRequest 글_1번;
+    private PostUpdateRequest 수정글_1번;
+    private PostDeleteRequest 글_1번_삭제_요청;
 
     @BeforeEach
     void setUp() {
@@ -24,8 +28,9 @@ class PostServiceTest {
         String title_1 = "포스트1";
         String title_2 = "포스트2";
 
-        글_1번 = new Post(postId, authorId, title_1);
-        수정글_1번 = new Post(postId, authorId, title_2);
+        글_1번 = new PostCreateRequest(postId, authorId, title_1);
+        수정글_1번 = new PostUpdateRequest(postId, authorId, title_2);
+        글_1번_삭제_요청 = new PostDeleteRequest(글_1번.getId());
     }
 
     @Test
@@ -46,8 +51,10 @@ class PostServiceTest {
 
     @Test
     public void 삭제한다() {
+        postService.savePost(글_1번);
+
         //when
-        postService.deletePost(글_1번);
+        postService.deletePost(글_1번_삭제_요청);
     }
 
     @Test
@@ -55,6 +62,6 @@ class PostServiceTest {
         postService.savePost(글_1번);
 
         //when
-        postService.deletePost(글_1번.getPostId());
+        postService.deletePost(글_1번.getId());
     }
 }

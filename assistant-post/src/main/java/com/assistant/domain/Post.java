@@ -36,6 +36,10 @@ public class Post {
         return new Post(id, authorId, title);
     }
 
+    public Post update(Long id, Long authorId, String title) {
+        return new Post(id, authorId, title);
+    }
+
     public Post update(Post updatePost) {
         return new Post(updatePost.postId, updatePost.authorId, updatePost.title);
     }

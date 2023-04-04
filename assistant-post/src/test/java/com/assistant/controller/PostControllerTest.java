@@ -1,6 +1,6 @@
 package com.assistant.controller;
 
-import com.assistant.dto.PostRequest;
+import com.assistant.dto.PostCreateRequest;
 import com.assistant.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ class PostControllerTest {
     @Test
     @DisplayName("포스트 저장이 된다.")
     public void 포스트를_저장한다() throws Exception {
-        PostRequest 포스트_1번 = new PostRequest(1L, 1L, "1번포스트");
+        PostCreateRequest 포스트_1번 = new PostCreateRequest(1L, 1L, "1번포스트");
 
         webTestClient.post()
                 .uri("/post/save")
@@ -43,7 +43,7 @@ class PostControllerTest {
         // given
         포스트를_저장한다();
 
-        PostRequest 포스트_1번 = new PostRequest(1L, 1L, "1번포스트_수정");
+        PostCreateRequest 포스트_1번 = new PostCreateRequest(1L, 1L, "1번포스트_수정");
 
         webTestClient.put()
                 .uri("/post/update")
