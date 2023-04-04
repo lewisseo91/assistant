@@ -12,17 +12,19 @@ public class CanvasTest {
     @Test
     public void 캔버스를_등록할수_있다() {
         Long id = 1L;
-        Canvas canvas = Canvas.create(id);
+        Long postId = 1L;
+        Canvas canvas = Canvas.create(id, postId);
         assertEquals(canvas.getCanvasId(), id);
     }
 
     @Test
     public void 캔버스를_수정할수_있다() {
         Long id = 1L;
+        Long postId = 1L;
         List<Long> updateShapes = List.of(1L, 2L);
         List<Long> updateContents = List.of(1L, 2L);
 
-        Canvas updatedCanvas = Canvas.update(id, updateShapes, updateContents);
+        Canvas updatedCanvas = Canvas.update(id, postId, updateShapes, updateContents);
         assertEquals(updatedCanvas.getShapes(), updateShapes);
         assertEquals(updatedCanvas.getContents(), updateContents);
     }

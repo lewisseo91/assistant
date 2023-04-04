@@ -19,9 +19,10 @@ class ShapeTest {
         Shape shape = Shape.create(shapeId, styleId, points);
 
         Long canvasId = 1L;
-        Canvas canvas = Canvas.create(canvasId);
+        Long postId = 1L;
+        Canvas canvas = Canvas.create(canvasId, postId);
 
-        Canvas updatedCanvas = Canvas.update(canvas.getCanvasId(), List.of(shape.getShapeId()), canvas.getContents());
+        Canvas updatedCanvas = Canvas.update(canvas.getCanvasId(), canvas.getPostId(), List.of(shape.getShapeId()), canvas.getContents());
         assertEquals(updatedCanvas.getShapes().size(), 1);
     }
 
@@ -34,7 +35,8 @@ class ShapeTest {
         Shape shape = Shape.create(shapeId, styleId, points);
 
         Long canvasId = 1L;
-        Canvas canvas = Canvas.create(canvasId, List.of(shape.getShapeId()));
+        Long postId = 1L;
+        Canvas canvas = Canvas.create(canvasId, postId, List.of(shape.getShapeId()));
 
         assertEquals(canvas.getShapes().size(), 1);
     }
@@ -48,9 +50,10 @@ class ShapeTest {
         Shape shape = Shape.create(shapeId, styleId, points);
 
         Long canvasId = 1L;
+        Long postId = 1L;
         List<Long> shapes = new ArrayList<>();
         shapes.add(shape.getShapeId());
-        Canvas canvas = Canvas.create(canvasId, shapes);
+        Canvas canvas = Canvas.create(canvasId, postId, shapes);
 
         canvas.deleteShape(shape.getShapeId());
         assertEquals(canvas.getShapes().size(), 0);
@@ -82,9 +85,10 @@ class ShapeTest {
         Shape shape = Shape.create(shapeId, styleId, points);
 
         Long canvasId = 1L;
+        Long postId = 1L;
         List<Long> shapes = new ArrayList<>();
         shapes.add(shape.getShapeId());
-        Canvas canvas = Canvas.create(canvasId, shapes);
+        Canvas canvas = Canvas.create(canvasId, postId, shapes);
 
         canvas.deleteShape(shape.getShapeId());
         shape.delete(); // 나중에 간접 연결 구조라면 id로 조회 후 삭제 필요
@@ -121,9 +125,10 @@ class ShapeTest {
         Shape shape = Shape.create(shapeId, styleId, points);
 
         Long canvasId = 1L;
+        Long postId = 1L;
         List<Long> shapes = new ArrayList<>();
         shapes.add(shape.getShapeId());
-        Canvas canvas = Canvas.create(canvasId, shapes);
+        Canvas canvas = Canvas.create(canvasId, postId, shapes);
 
         canvas.deleteShape(shape.getShapeId());
         shape.delete(); // 나중에 간접 연결 구조라면 id로 조회 후 삭제 필요
