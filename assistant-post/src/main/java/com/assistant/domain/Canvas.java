@@ -1,29 +1,31 @@
 package com.assistant.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Canvas {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private final Long canvasId;
 
+    @Column(name = "post_id")
     private final Long postId;
 
-    private final List<Long> shapes; // 임시
-    private final List<Long> contents;
-
+    public Canvas() {
+        this.canvasId = null;
+        this.postId = null;
+    }
 
     public Canvas(Long canvasId, Long postId) {
         this.canvasId = canvasId;
         this.postId = postId;
-        this.shapes = new ArrayList<>();
-        this.contents = new ArrayList<>();
-    }// 임시
-
-    public Canvas(Long canvasId, Long postId, List<Long> shapes, List<Long> contents) {
-        this.canvasId = canvasId;
-        this.postId = postId;
-        this.shapes = shapes;
-        this.contents = contents;
     }
 
     public static Canvas create(Long id, Long postId) {
@@ -31,17 +33,12 @@ public class Canvas {
     }
 
     public static Canvas create(Long id, Long postId, List<Long> shapes) {
-        return new Canvas(id, postId, shapes, new ArrayList<>());
+        return new Canvas(id, postId);
     }
 
-    public static Canvas update(Long canvasId, Long postId, List<Long> updateShapes, List<Long> updateContents) {
-        return new Canvas(canvasId, postId, updateShapes, updateContents);
+    public static Canvas update(Long canvasId, Long postId) {
+        return new Canvas(canvasId, postId);
     }
-
-    public void deleteShape(Long shapeId) {
-        this.shapes.remove(shapeId);
-    }
-
     public Long getCanvasId() {
         return canvasId;
     }
@@ -50,11 +47,4 @@ public class Canvas {
         return postId;
     }
 
-    public List<Long> getShapes() {
-        return this.shapes;
-    }
-
-    public List<Long> getContents() {
-        return contents;
-    }
 }
