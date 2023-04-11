@@ -1,6 +1,5 @@
 package com.assistant.service;
 
-import com.assistant.domain.Post;
 import com.assistant.dto.PostCreateRequest;
 import com.assistant.dto.PostDeleteRequest;
 import com.assistant.dto.PostUpdateRequest;
@@ -10,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.DirtiesContext;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @DataJpaTest
 @Import(PostService.class)
 class PostServiceTest {
@@ -30,7 +31,7 @@ class PostServiceTest {
 
         글_1번 = new PostCreateRequest(postId, authorId, title_1);
         수정글_1번 = new PostUpdateRequest(postId, authorId, title_2);
-        글_1번_삭제_요청 = new PostDeleteRequest(글_1번.getId());
+        글_1번_삭제_요청 = new PostDeleteRequest(postId);
     }
 
     @Test

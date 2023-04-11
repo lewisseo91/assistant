@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -29,10 +27,6 @@ public class Canvas {
     }
 
     public static Canvas create(Long id, Long postId) {
-        return new Canvas(id, postId);
-    }
-
-    public static Canvas create(Long id, Long postId, List<Long> shapes) {
         return new Canvas(id, postId);
     }
 

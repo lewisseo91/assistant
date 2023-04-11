@@ -1,25 +1,40 @@
 package com.assistant.domain;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Shape {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private final Long shapeId;
 
+    @Column(name = "style_id")
     private final Long styleId;
 
-    private final List<Long> points; // 임시
-
+    @Column(name = "canvas_id")
     private final Long canvasId;
 
-    public Shape(Long canvasId, Long shapeId, Long styleId, List<Long> points) {
-        this.canvasId = canvasId;
+    @Column(name = "deleted")
+    private Boolean deleted;
+
+    public Shape(Long shapeId, Long styleId, Long canvasId) {
         this.shapeId = shapeId;
         this.styleId = styleId;
-        this.points = points;
+        this.canvasId = canvasId;
+        this.deleted = false;
     }
 
-    public static Shape create(Long canvasId, Long shapeId, Long styleId, List<Long> points) {
-        return new Shape(canvasId, shapeId, styleId, points);
+    public static Shape create(Long shapeId, Long styleId, Long canvasId) {
+        return new Shape(shapeId, styleId, canvasId);
+    }
+
+    public void delete() {
+        this.deleted = true;
     }
 
     public Long getShapeId() {
@@ -28,14 +43,6 @@ public class Shape {
 
     public Long getCanvasId() {
         return canvasId;
-    }
-
-    public List<Long> getPoints() {
-        return this.points;
-    }
-
-    public void delete() {
-        this.points.clear();
     }
 
     public Long getStyleId() {
