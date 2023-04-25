@@ -12,8 +12,7 @@ class ShapeTest {
     public void 쉐입을_등록할수_있다_1() {
         Long canvasId = 1L;
         Long shapeId = 1L;
-        Long styleId = 1L;
-        Shape shape = Shape.create(shapeId, styleId, canvasId);
+        Shape shape = Shape.create(shapeId, canvasId);
 
         assertEquals(shape.getShapeId(), 1);
     }
@@ -24,10 +23,11 @@ class ShapeTest {
         Long canvasId = 1L;
         Long shapeId = 1L;
         Long styleId = 1L;
+        Shape shape = Shape.create(shapeId, canvasId);
         ShapeStyle style = ShapeStyle.create(styleId, shapeId, "portrait", "normal");
-        Shape shape = Shape.create(shapeId, style.getStyleId(), canvasId);
 
-        assertEquals(shape.getStyleId(), 1L);
+        assertEquals(shape.getShapeId(), 1L);
+        assertEquals(style.getStyleId(), 1L);
     }
 
 }

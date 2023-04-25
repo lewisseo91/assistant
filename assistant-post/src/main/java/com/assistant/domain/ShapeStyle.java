@@ -27,8 +27,20 @@ public class ShapeStyle {
         return styleId;
     }
 
-    public boolean getDeleted() {
-        return this.deleted;
+    public Long getShapeId() {
+        return shapeId;
+    }
+
+    public String getOrientation() {
+        return orientation;
+    }
+
+    public String getFontStyle() {
+        return fontStyle;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 
     public void delete() {

@@ -13,24 +13,20 @@ public class Shape {
     @GeneratedValue(strategy = IDENTITY)
     private final Long shapeId;
 
-    @Column(name = "style_id")
-    private final Long styleId;
-
     @Column(name = "canvas_id")
     private final Long canvasId;
 
     @Column(name = "deleted")
     private Boolean deleted;
 
-    public Shape(Long shapeId, Long styleId, Long canvasId) {
+    public Shape(Long shapeId, Long canvasId) {
         this.shapeId = shapeId;
-        this.styleId = styleId;
         this.canvasId = canvasId;
         this.deleted = false;
     }
 
-    public static Shape create(Long shapeId, Long styleId, Long canvasId) {
-        return new Shape(shapeId, styleId, canvasId);
+    public static Shape create(Long shapeId, Long canvasId) {
+        return new Shape(shapeId, canvasId);
     }
 
     public void delete() {
@@ -43,9 +39,5 @@ public class Shape {
 
     public Long getCanvasId() {
         return canvasId;
-    }
-
-    public Long getStyleId() {
-        return this.styleId;
     }
 }

@@ -3,6 +3,7 @@ package com.assistant.service;
 import com.assistant.dto.PostCreateRequest;
 import com.assistant.dto.PostDeleteRequest;
 import com.assistant.dto.PostUpdateRequest;
+import com.assistant.dto.ShapeCreateRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @DataJpaTest
@@ -28,9 +32,10 @@ class PostServiceTest {
         Long authorId = 1L;
         String title_1 = "포스트1";
         String title_2 = "포스트2";
+        List<ShapeCreateRequest> shapes =  new ArrayList<>();
 
-        글_1번 = new PostCreateRequest(postId, authorId, title_1);
-        수정글_1번 = new PostUpdateRequest(postId, authorId, title_2);
+        글_1번 = new PostCreateRequest(postId, authorId, title_1, shapes);
+        수정글_1번 = new PostUpdateRequest(postId, authorId, title_2, shapes);
         글_1번_삭제_요청 = new PostDeleteRequest(postId);
     }
 

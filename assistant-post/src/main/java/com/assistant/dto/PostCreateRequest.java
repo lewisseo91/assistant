@@ -1,14 +1,18 @@
 package com.assistant.dto;
 
+import java.util.List;
+
 public final class PostCreateRequest {
     private final Long id;
     private final Long authorId;
     private final String title;
+    private final List<ShapeCreateRequest> shapeCreateRequests;
 
-    public PostCreateRequest(Long id, Long authorId, String title) {
+    public PostCreateRequest(Long id, Long authorId, String title, List<ShapeCreateRequest> shapeCreateRequests) {
         this.id = id;
         this.authorId = authorId;
         this.title = title;
+        this.shapeCreateRequests = shapeCreateRequests;
     }
 
     public Long getId() {
@@ -21,5 +25,9 @@ public final class PostCreateRequest {
 
     public String getTitle() {
         return title;
+    }
+
+    public List<ShapeCreateRequest> getShapeCreateRequests() {
+        return shapeCreateRequests;
     }
 }

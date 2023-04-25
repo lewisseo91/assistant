@@ -1,6 +1,7 @@
 package com.assistant.controller;
 
 import com.assistant.dto.PostCreateRequest;
+import com.assistant.dto.PostUpdateRequest;
 import com.assistant.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+
+import java.util.List;
 
 @WebFluxTest(PostController.class)
 @AutoConfigureDataJpa
@@ -26,7 +29,7 @@ class PostControllerTest {
     @Test
     @DisplayName("포스트 저장이 된다.")
     public void 포스트를_저장한다() throws Exception {
-        PostCreateRequest 포스트_1번 = new PostCreateRequest(1L, 1L, "1번포스트");
+        PostCreateRequest 포스트_1번 = new PostCreateRequest(1L, 1L, "1번포스트", List.of());
 
         webTestClient.post()
                 .uri("/post/save")
@@ -43,7 +46,7 @@ class PostControllerTest {
         // given
         포스트를_저장한다();
 
-        PostCreateRequest 포스트_1번 = new PostCreateRequest(1L, 1L, "1번포스트_수정");
+        PostUpdateRequest 포스트_1번 = new PostUpdateRequest(1L, 1L, "1번포스트_수정", List.of());
 
         webTestClient.put()
                 .uri("/post/update")
