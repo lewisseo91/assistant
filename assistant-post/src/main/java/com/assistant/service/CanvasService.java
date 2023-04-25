@@ -16,11 +16,7 @@ public class CanvasService {
     }
 
     public void create(CanvasCreateRequest canvasCreateRequest) {
-        Canvas canvas = Canvas.create(getNextId(), canvasCreateRequest.getPostId());
+        Canvas canvas = Canvas.create(canvasCreateRequest.getCanvasId(), canvasCreateRequest.getPostId());
         canvasRepository.save(canvas);
-    }
-
-    public Long getNextId() {
-        return canvasRepository.getNextId();
     }
 }
