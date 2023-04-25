@@ -20,6 +20,12 @@ public class Post {
     @Column(name = "title")
     private final String title;
 
+    public Post() {
+        this.postId = null;
+        this.authorId = null;
+        this.title = null;
+    }
+
     public Post(Long postId, Long authorId, String title) {
         this.postId = postId;
         this.authorId = authorId;
