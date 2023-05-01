@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -23,7 +25,7 @@ class CanvasServiceTest {
     @Test
     public void 캔버스는_하나의_포스트를_가지고_있다() {
         Long postId = 1L;
-        CanvasCreateRequest canvasCreateRequest = new CanvasCreateRequest(postId);
+        CanvasCreateRequest canvasCreateRequest = new CanvasCreateRequest(postId, List.of());
 
         canvasService.create(canvasCreateRequest);
 

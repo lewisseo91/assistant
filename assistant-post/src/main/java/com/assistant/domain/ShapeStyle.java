@@ -1,14 +1,28 @@
 package com.assistant.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class ShapeStyle {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private final Long styleId;
 
+    @Column(name = "shape_id")
     private final Long shapeId;
 
+    @Column(name = "orientation")
     private final String orientation;
 
+    @Column(name = "font_style")
     private final String fontStyle;
 
+    @Column(name = "deleted")
     private boolean deleted;
 
     public ShapeStyle(Long styleId, Long shapeId, String orientation, String fontStyle) {

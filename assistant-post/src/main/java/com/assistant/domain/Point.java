@@ -1,14 +1,28 @@
 package com.assistant.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Point {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private final Long pointId;
 
+    @Column(name = "shape_id")
     private final Long shapeId;
 
+    @Column(name = "x")
     private final Long x;
 
+    @Column(name = "y")
     private final Long y;
 
+    @Column(name = "z")
     private final Long z;
 
     public Point(Long pointId, Long shapeId, Long x, Long y, Long z) {

@@ -1,17 +1,22 @@
 package com.assistant.dto;
 
+import java.util.List;
+
 public final class CanvasCreateRequest {
     private final Long canvasId;
+
     private final Long postId;
 
-    public CanvasCreateRequest(Long canvasId, Long postId) {
-        this.canvasId = canvasId;
-        this.postId = postId;
-    }
+    private final List<ShapeCreateRequest> shapeCreateRequests;
 
-    public CanvasCreateRequest(Long postId) {
+    public CanvasCreateRequest(Long postId, List<ShapeCreateRequest> shapeCreateRequests) {
         this.canvasId = null;
         this.postId = postId;
+        this.shapeCreateRequests = shapeCreateRequests;
+    }
+
+    public List<ShapeCreateRequest> getShapeCreateRequests() {
+        return shapeCreateRequests;
     }
 
     public Long getPostId() {
