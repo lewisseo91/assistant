@@ -23,11 +23,13 @@ public class PostService {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    public void savePost(PostCreateRequest postCreateRequest) {
+    public Post savePost(PostCreateRequest postCreateRequest) {
         Post post = Post.create(postCreateRequest.getId(), postCreateRequest.getAuthorId(), postCreateRequest.getTitle());
         Post savedPost = postRepository.save(post);
 
         this.sendCanvasCreateRequest(postCreateRequest, savedPost);
+
+        return savedPost;
     }
 
     private void sendCanvasCreateRequest(PostCreateRequest postCreateRequest, Post savedPost) {

@@ -1,5 +1,6 @@
 package com.assistant.service;
 
+import com.assistant.domain.Post;
 import com.assistant.dto.PostCreateRequest;
 import com.assistant.dto.PostDeleteRequest;
 import com.assistant.dto.PostUpdateRequest;
@@ -15,6 +16,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @DataJpaTest
 @Import(PostService.class)
@@ -23,7 +26,7 @@ class PostServiceTest {
     private PostService postService;
 
     private final Long postId = 1L;
-    private PostCreateRequest 글_1번;
+    private PostCreateRequest 글_1번_요청;
     private PostUpdateRequest 수정글_1번;
     private PostDeleteRequest 글_1번_삭제_요청;
 
@@ -34,14 +37,16 @@ class PostServiceTest {
         String title_2 = "포스트2";
         List<ShapeCreateRequest> shapes =  new ArrayList<>();
 
-        글_1번 = new PostCreateRequest(postId, authorId, title_1, shapes);
+        글_1번_요청 = new PostCreateRequest(postId, authorId, title_1, shapes);
         수정글_1번 = new PostUpdateRequest(postId, authorId, title_2, shapes);
         글_1번_삭제_요청 = new PostDeleteRequest(postId);
     }
 
     @Test
     public void 등록한다() {
-        postService.savePost(글_1번);
+        Post savedPost = postService.savePost(글_1번_요청);
+
+        assertEquals(savedPost.getPostId(), 글_1번_요청.getId());
     }
 
     @Test
@@ -57,7 +62,7 @@ class PostServiceTest {
 
     @Test
     public void 삭제한다() {
-        postService.savePost(글_1번);
+        postService.savePost(글_1번_요청);
 
         //when
         postService.deletePost(글_1번_삭제_요청);
@@ -65,9 +70,9 @@ class PostServiceTest {
 
     @Test
     public void 삭제한다_2() {
-        postService.savePost(글_1번);
+        postService.savePost(글_1번_요청);
 
         //when
-        postService.deletePost(글_1번.getId());
+        postService.deletePost(글_1번_요청.getId());
     }
 }

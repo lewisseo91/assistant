@@ -1,8 +1,6 @@
 package com.assistant.service;
 
 import com.assistant.domain.Shape;
-import com.assistant.domain.ShapeStyle;
-import com.assistant.dto.CanvasCreateRequest;
 import com.assistant.dto.PointCreateRequest;
 import com.assistant.dto.ShapeCreateRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +12,6 @@ import org.springframework.context.annotation.Import;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @DataJpaTest
 @Import(ShapeService.class)
