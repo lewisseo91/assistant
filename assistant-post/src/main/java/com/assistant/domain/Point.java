@@ -33,6 +33,14 @@ public class Point {
         this.z = z;
     }
 
+    public Point() {
+        this.pointId = null;
+        this.shapeId = null;
+        this.x = null;
+        this.y = null;
+        this.z = null;
+    }
+
     public static Point create(Long pointId, Long shapeId, Long x, Long y, Long z) {
         return new Point(pointId, shapeId, x, y, z);
     }

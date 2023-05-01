@@ -25,6 +25,12 @@ public class Shape {
         this.deleted = false;
     }
 
+    public Shape() {
+        this.shapeId = null;
+        this.canvasId = null;
+        this.deleted = false;
+    }
+
     public static Shape create(Long shapeId, Long canvasId) {
         return new Shape(shapeId, canvasId);
     }
