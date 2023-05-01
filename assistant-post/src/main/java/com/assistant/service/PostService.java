@@ -27,6 +27,10 @@ public class PostService {
         Post post = Post.create(postCreateRequest.getId(), postCreateRequest.getAuthorId(), postCreateRequest.getTitle());
         Post savedPost = postRepository.save(post);
 
+        this.sendCanvasCreateRequest(postCreateRequest, savedPost);
+    }
+
+    private void sendCanvasCreateRequest(PostCreateRequest postCreateRequest, Post savedPost) {
         CanvasCreateRequest canvasCreateRequest = new CanvasCreateRequest(savedPost.getPostId(), postCreateRequest.getShapeCreateRequests());
         applicationEventPublisher.publishEvent(canvasCreateRequest);
     }

@@ -24,6 +24,10 @@ public class CanvasService {
         Canvas canvas = Canvas.create(canvasCreateRequest.getCanvasId(), canvasCreateRequest.getPostId());
         Canvas savedCanvas = canvasRepository.save(canvas);
 
+        this.sendShapeCreateRequest(canvasCreateRequest, savedCanvas);
+    }
+
+    private void sendShapeCreateRequest(CanvasCreateRequest canvasCreateRequest, Canvas savedCanvas) {
         canvasCreateRequest.getShapeCreateRequests()
                 .forEach(shapeCreateRequest -> {
                     ShapeCreateRequest updatedCreateRequest = shapeCreateRequest.update(savedCanvas.getCanvasId(), shapeCreateRequest);
