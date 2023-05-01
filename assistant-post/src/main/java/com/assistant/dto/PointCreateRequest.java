@@ -38,4 +38,8 @@ public class PointCreateRequest {
     public Long getZ() {
         return z;
     }
+
+    public PointCreateRequest update(Long shapeId, PointCreateRequest pointCreateRequest) {
+        return new PointCreateRequest(pointCreateRequest.pointId, shapeId, pointCreateRequest.x, pointCreateRequest.y, pointCreateRequest.z);
+    }
 }
