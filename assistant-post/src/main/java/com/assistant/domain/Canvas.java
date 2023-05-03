@@ -1,51 +1,44 @@
 package com.assistant.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Canvas {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private final Long canvasId;
-    private final List<Long> shapes; // 임시
-    private final List<Long> contents;
 
+    @Column(name = "post_id")
+    private final Long postId;
 
-    public Canvas(Long canvasId) {
+    public Canvas() {
+        this.canvasId = null;
+        this.postId = null;
+    }
+
+    public Canvas(Long canvasId, Long postId) {
         this.canvasId = canvasId;
-        this.shapes = new ArrayList<>();
-        this.contents = new ArrayList<>();
-    }// 임시
-
-    public Canvas(Long canvasId, List<Long> shapes, List<Long> contents) {
-        this.canvasId = canvasId;
-        this.shapes = shapes;
-        this.contents = contents;
+        this.postId = postId;
     }
 
-    public static Canvas create(Long id) {
-        return new Canvas(id);
+    public static Canvas create(Long id, Long postId) {
+        return new Canvas(id, postId);
     }
 
-    public static Canvas create(Long id, List<Long> shapes) {
-        return new Canvas(id, shapes, new ArrayList<>());
+    public static Canvas update(Long canvasId, Long postId) {
+        return new Canvas(canvasId, postId);
     }
-
-    public void deleteShape(Long shapeId) {
-        this.shapes.remove(shapeId);
-    }
-
     public Long getCanvasId() {
         return canvasId;
     }
 
-    public static Canvas update(Long canvasId, List<Long> updateShapes, List<Long> updateContents) {
-        return new Canvas(canvasId, updateShapes, updateContents);
+    public Long getPostId() {
+        return postId;
     }
 
-    public List<Long> getShapes() {
-        return this.shapes;
-    }
-
-    public List<Long> getContents() {
-        return contents;
-    }
 }

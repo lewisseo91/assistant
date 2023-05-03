@@ -22,11 +22,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void update(User user, String updatedUserName, List<UserRole> updatedUserRoles) {
-        user.update(updatedUserName, updatedUserRoles);
+    public User update(User user, String updatedUserName, List<UserRole> updatedUserRoles) {
+        return user.update(user.getUserId(), updatedUserName, updatedUserRoles);
     }
 
     public void delete(User user) {
         userRepository.deleteById(user.getUserId());
+    }
+
+    public User findById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 }

@@ -1,13 +1,29 @@
 package com.assistant.domain;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class User {
-    private long userId;
-    private String userName;
-    private List<UserRole> userRoles;
+import static javax.persistence.GenerationType.IDENTITY;
 
-    public User(long userId, String userName, List<UserRole> userRoles) {
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private final Long userId;
+    @Column(name = "user_name")
+    private final String userName;
+
+    @OneToMany(mappedBy = "userRoleId", fetch = FetchType.LAZY)
+    private final List<UserRole> userRoles;
+
+    public User() {
+        this.userId = null;
+        this.userName = null;
+        this.userRoles = new ArrayList<>();
+    }
+
+    public User(Long userId, String userName, List<UserRole> userRoles) {
         this.userId = userId;
         this.userName = userName;
         this.userRoles = userRoles;
@@ -17,7 +33,7 @@ public class User {
         return new User(userId, userName, userRoles);
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -29,7 +45,7 @@ public class User {
         return userRoles;
     }
 
-    public User update(String updatedUserName, List<UserRole> updatedUserRoles) {
+    public User update(Long userId, String updatedUserName, List<UserRole> updatedUserRoles) {
         return new User(userId, updatedUserName, updatedUserRoles);
     }
 }

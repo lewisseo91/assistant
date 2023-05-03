@@ -21,9 +21,9 @@ public class Post {
     private final String title;
 
     public Post() {
-        postId = null;
-        authorId = null;
-        title = null;
+        this.postId = null;
+        this.authorId = null;
+        this.title = null;
     }
 
     public Post(Long postId, Long authorId, String title) {
@@ -33,6 +33,10 @@ public class Post {
     }
 
     public static Post create(Long id, Long authorId, String title) {
+        return new Post(id, authorId, title);
+    }
+
+    public Post update(Long id, Long authorId, String title) {
         return new Post(id, authorId, title);
     }
 
