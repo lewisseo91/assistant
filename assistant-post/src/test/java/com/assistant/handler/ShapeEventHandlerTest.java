@@ -1,7 +1,6 @@
 package com.assistant.handler;
 
 import com.assistant.dto.PointCreateRequest;
-import com.assistant.event.CanvasCreateEvent;
 import com.assistant.event.ShapeCreateEvent;
 import com.assistant.service.ShapeService;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +13,6 @@ import org.springframework.test.context.event.RecordApplicationEvents;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
