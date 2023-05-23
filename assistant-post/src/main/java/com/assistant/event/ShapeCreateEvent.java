@@ -1,6 +1,7 @@
 package com.assistant.event;
 
 import com.assistant.dto.PointCreateRequest;
+import com.assistant.dto.ShapeCreateRequest;
 
 import java.util.List;
 
@@ -45,5 +46,9 @@ public class ShapeCreateEvent {
 
     public ShapeCreateEvent update(Long canvasId, ShapeCreateEvent shapeCreateRequest) {
         return new ShapeCreateEvent(shapeCreateRequest.shapeId, canvasId, shapeCreateRequest.orientation, shapeCreateRequest.fontStyle, shapeCreateRequest.pointCreateRequests);
+    }
+
+    public ShapeCreateRequest toRequest() {
+        return ShapeCreateRequest.create(shapeId, canvasId, orientation, fontStyle, pointCreateRequests);
     }
 }

@@ -21,6 +21,10 @@ public class ShapeCreateRequest {
         this.pointCreateRequests = pointCreateRequests;
     }
 
+    public static ShapeCreateRequest create(Long shapeId, Long canvasId, String orientation, String fontStyle, List<PointCreateRequest> pointCreateRequests) {
+        return new ShapeCreateRequest(shapeId, canvasId, orientation, fontStyle, pointCreateRequests);
+    }
+
     public Long getShapeId() {
         return shapeId;
     }
