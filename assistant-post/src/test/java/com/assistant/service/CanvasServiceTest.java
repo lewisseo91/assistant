@@ -1,6 +1,6 @@
 package com.assistant.service;
 
-import com.assistant.dto.CanvasCreateRequest;
+import com.assistant.event.CanvasCreateEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ class CanvasServiceTest {
     @Test
     public void 캔버스는_하나의_포스트를_가지고_있다() {
         Long postId = 1L;
-        CanvasCreateRequest canvasCreateRequest = new CanvasCreateRequest(postId, List.of());
+        CanvasCreateEvent canvasCreateEvent = new CanvasCreateEvent(postId, List.of());
 
-        canvasService.create(canvasCreateRequest);
+        canvasService.create(canvasCreateEvent);
 
-        assertNotEquals(canvasCreateRequest.getPostId(), null);
-        assertEquals(canvasCreateRequest.getPostId(), postId);
+        assertNotEquals(canvasCreateEvent.getPostId(), null);
+        assertEquals(canvasCreateEvent.getPostId(), postId);
     }
 }
