@@ -1,46 +1,40 @@
 package com.assistant.handler;
 
-import com.assistant.domain.Post;
-import com.assistant.dto.PostCreateRequest;
-import com.assistant.dto.ShapeCreateRequest;
 import com.assistant.event.CanvasCreateEvent;
-import com.assistant.service.PostService;
+import com.assistant.service.CanvasService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.event.RecordApplicationEvents;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
+@DisplayName("캔버스 이벤트 테스트")
 @SpringBootTest
 @RecordApplicationEvents
 class CanvasEventHandlerTest {
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
-    @Autowired
-    private PostService postService;
+    @MockBean
+    private CanvasService canvasService;
 
-    @Test
-    public void 등록한다() {
-        Long authorId = 1L;
-        String title_1 = "포스트1";
-        List<ShapeCreateRequest> shapes =  new ArrayList<>();
 
-        PostCreateRequest 글_1번_요청 = new PostCreateRequest(1L, authorId, title_1, shapes);
-        Post savedPost = postService.savePost(글_1번_요청);
-
-        assertEquals(savedPost.getPostId(), 글_1번_요청.getId());
-    }
-
+    @DisplayName("캔버스 생성 이벤트 테스트")
     @Test
     public void 캔버스_생성_이벤트() {
         CanvasCreateEvent canvasCreateEvent = new CanvasCreateEvent(null, List.of());
         applicationEventPublisher.publishEvent(canvasCreateEvent);
+
+        verify(canvasService, times(1))
+                .create(any());
     }
 
 }
