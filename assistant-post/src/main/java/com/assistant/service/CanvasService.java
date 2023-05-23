@@ -1,7 +1,7 @@
 package com.assistant.service;
 
 import com.assistant.domain.Canvas;
-import com.assistant.event.CanvasCreateEvent;
+import com.assistant.dto.CanvasCreateRequest;
 import com.assistant.dto.ShapeCreateRequest;
 import com.assistant.repository.CanvasRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,14 +20,14 @@ public class CanvasService {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    public void create(CanvasCreateEvent canvasCreateEvent) {
-        Canvas canvas = Canvas.create(canvasCreateEvent.getCanvasId(), canvasCreateEvent.getPostId());
+    public void create(CanvasCreateRequest canvasCreateRequest) {
+        Canvas canvas = Canvas.create(canvasCreateRequest.getCanvasId(), canvasCreateRequest.getPostId());
         Canvas savedCanvas = canvasRepository.save(canvas);
 
-        this.sendShapeCreateRequest(canvasCreateEvent, savedCanvas);
+        this.sendShapeCreateRequest(canvasCreateRequest, savedCanvas);
     }
 
-    private void sendShapeCreateRequest(CanvasCreateEvent canvasCreateEvent, Canvas savedCanvas) {
+    private void sendShapeCreateRequest(CanvasCreateRequest canvasCreateEvent, Canvas savedCanvas) {
         canvasCreateEvent.getShapeCreateRequests()
                 .forEach(shapeCreateRequest -> {
                     ShapeCreateRequest updatedCreateRequest = shapeCreateRequest.update(savedCanvas.getCanvasId(), shapeCreateRequest);

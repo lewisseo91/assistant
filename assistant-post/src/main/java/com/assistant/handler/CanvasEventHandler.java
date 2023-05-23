@@ -15,7 +15,7 @@ public class CanvasEventHandler {
 
     @EventListener
     public void onCreateCanvasRequest(CanvasCreateEvent canvasCreateEvent) {
-        System.out.println("createCanvas event");
-        canvasService.create(canvasCreateEvent);
+        System.out.println("Create Canvas Event");
+        canvasService.create(canvasCreateEvent.toRequest());
     }
 }
