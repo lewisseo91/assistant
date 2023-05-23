@@ -1,14 +1,17 @@
 package com.assistant.domain;
 
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("캔버스 도메인 테스트")
 public class CanvasTest {
 
+    @DisplayName("캔버스를 등록할 수 있다.")
     @Test
     public void 캔버스를_등록할수_있다() {
         Long id = 1L;
@@ -17,6 +20,7 @@ public class CanvasTest {
         assertEquals(canvas.getCanvasId(), id);
     }
 
+    @DisplayName("캔버스를 수정할 수 있다.")
     @Test
     public void 캔버스를_수정할수_있다() {
         Long id = 1L;

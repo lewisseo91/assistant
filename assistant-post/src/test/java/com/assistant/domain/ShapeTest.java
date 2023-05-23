@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("쉐입 도메인 테스트")
 class ShapeTest {
 
     @DisplayName(value = "쉐입 등록 (캔버스 등록 후)")
