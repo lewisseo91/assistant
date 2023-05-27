@@ -1,8 +1,8 @@
-package com.assistant.dto;
+package com.assistant.event;
 
-import com.assistant.domain.ShapeStyle;
+import com.assistant.dto.ShapeStyleCreateRequest;
 
-public class ShapeStyleCreateRequest {
+public class ShapeStyleCreateEvent {
     private final Long styleId;
 
     private final Long shapeId;
@@ -11,7 +11,11 @@ public class ShapeStyleCreateRequest {
 
     private final String fontStyle;
 
-    public ShapeStyleCreateRequest(Long styleId, Long shapeId, String orientation, String fontStyle) {
+    public ShapeStyleCreateEvent(Long shapeId, String orientation, String fontStyle) {
+        this(null, shapeId, orientation, fontStyle);
+    }
+
+    public ShapeStyleCreateEvent(Long styleId, Long shapeId, String orientation, String fontStyle) {
         this.styleId = styleId;
         this.shapeId = shapeId;
         this.orientation = orientation;
@@ -34,7 +38,7 @@ public class ShapeStyleCreateRequest {
         return fontStyle;
     }
 
-    public ShapeStyle to() {
-        return ShapeStyle.create(styleId, shapeId, orientation, fontStyle);
+    public ShapeStyleCreateRequest toRequest() {
+        return new ShapeStyleCreateRequest(styleId, shapeId, orientation, fontStyle);
     }
 }
