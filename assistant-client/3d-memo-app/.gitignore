@@ -1,0 +1,92 @@
+# Node.js 관련
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 환경 변수 파일
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 로그 파일들
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# 디버깅 관련
+.DS_Store
+.idea/
+.vscode/
+.vscode/*
+*.swp
+*.swo
+
+# 빌드 결과물
+dist/
+build/
+coverage/
+.tmp/
+.temp/
+.cache/
+out/
+.next/
+.nuxt/
+
+# 운영 관련
+pm2*
+.pids
+*.pid
+*.seed
+*.pid.lock
+
+# Test 관련
+*.mocha
+junit.xml
+cypress/screenshots/
+cypress/videos/
+
+# Operating System 관련
+Thumbs.db
+.DS_Store
+
+# IntelliJ IDEA
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# npm
+package-lock.json
+.yarn-integrity
+
+# Yarn v2
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Parcel-bundler
+.cache/
+.parcel-cache/
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Mac System files
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
