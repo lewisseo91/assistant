@@ -18,6 +18,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+@DisplayName("포스트 서비스 테스트")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @DataJpaTest
 @Import(PostService.class)
@@ -42,6 +44,7 @@ class PostServiceTest {
         글_1번_삭제_요청 = new PostDeleteRequest(postId);
     }
 
+    @DisplayName("포스트를 등록할 수 있다.")
     @Test
     public void 등록한다() {
         Post savedPost = postService.savePost(글_1번_요청);
@@ -49,17 +52,19 @@ class PostServiceTest {
         assertEquals(savedPost.getPostId(), 글_1번_요청.getId());
     }
 
-    @Test
     @DisplayName("포스트는 하나 이상의 캔버스를 포함한다.")
+    @Test
     public void 포스트를_등록하면_하나_이상의_캔버스를_포함한다() {
 //        postService.savePost(글_1번);
     }
 
+    @DisplayName("포스트를 수정할 수 있다.")
     @Test
     public void 수정한다() {
         postService.updatePost(postId, 수정글_1번);
     }
 
+    @DisplayName("포스트를 삭제할 수 있다.")
     @Test
     public void 삭제한다() {
         postService.savePost(글_1번_요청);
@@ -68,6 +73,7 @@ class PostServiceTest {
         postService.deletePost(글_1번_삭제_요청);
     }
 
+    @DisplayName("포스트를 삭제할 수 있다.")
     @Test
     public void 삭제한다_2() {
         postService.savePost(글_1번_요청);

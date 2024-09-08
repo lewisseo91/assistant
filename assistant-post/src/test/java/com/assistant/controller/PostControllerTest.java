@@ -26,8 +26,8 @@ class PostControllerTest {
     @Autowired
     private PostService service;
 
-    @Test
     @DisplayName("포스트 저장이 된다.")
+    @Test
     public void 포스트를_저장한다() throws Exception {
         PostCreateRequest 포스트_1번 = new PostCreateRequest(1L, 1L, "1번포스트", List.of());
 
@@ -40,8 +40,8 @@ class PostControllerTest {
                 .expectBody(Void.class);
     }
 
-    @Test
     @DisplayName("포스트 수정이 된다.")
+    @Test
     public void 포스트를_수정한다() throws Exception {
         // given
         포스트를_저장한다();
@@ -57,8 +57,8 @@ class PostControllerTest {
                 .expectBody(Void.class);
     }
 
-    @Test
     @DisplayName("포스트 삭제가 된다.")
+    @Test
     public void 포스트를_삭제한다() throws Exception {
         // given
         포스트를_저장한다();

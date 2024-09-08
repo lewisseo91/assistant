@@ -27,8 +27,8 @@ public class CanvasService {
         this.sendShapeCreateRequest(canvasCreateRequest, savedCanvas);
     }
 
-    private void sendShapeCreateRequest(CanvasCreateRequest canvasCreateRequest, Canvas savedCanvas) {
-        canvasCreateRequest.getShapeCreateRequests()
+    private void sendShapeCreateRequest(CanvasCreateRequest canvasCreateEvent, Canvas savedCanvas) {
+        canvasCreateEvent.getShapeCreateRequests()
                 .forEach(shapeCreateRequest -> {
                     ShapeCreateRequest updatedCreateRequest = shapeCreateRequest.update(savedCanvas.getCanvasId(), shapeCreateRequest);
                     applicationEventPublisher.publishEvent(updatedCreateRequest);

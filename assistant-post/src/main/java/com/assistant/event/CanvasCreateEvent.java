@@ -1,22 +1,21 @@
-package com.assistant.dto;
+package com.assistant.event;
+
+import com.assistant.dto.CanvasCreateRequest;
+import com.assistant.dto.ShapeCreateRequest;
 
 import java.util.List;
 
-public final class CanvasCreateRequest {
+public final class CanvasCreateEvent {
     private final Long canvasId;
 
     private final Long postId;
 
     private final List<ShapeCreateRequest> shapeCreateRequests;
 
-    public CanvasCreateRequest(Long postId, List<ShapeCreateRequest> shapeCreateRequests) {
+    public CanvasCreateEvent(Long postId, List<ShapeCreateRequest> shapeCreateRequests) {
         this.canvasId = null;
         this.postId = postId;
         this.shapeCreateRequests = shapeCreateRequests;
-    }
-
-    public static CanvasCreateRequest create(Long postId, List<ShapeCreateRequest> shapeCreateRequests) {
-        return new CanvasCreateRequest(postId, shapeCreateRequests);
     }
 
     public List<ShapeCreateRequest> getShapeCreateRequests() {
@@ -29,5 +28,9 @@ public final class CanvasCreateRequest {
 
     public Long getCanvasId() {
         return canvasId;
+    }
+
+    public CanvasCreateRequest toRequest() {
+        return CanvasCreateRequest.create(postId, shapeCreateRequests);
     }
 }

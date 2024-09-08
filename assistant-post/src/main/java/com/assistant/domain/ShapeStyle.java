@@ -25,6 +25,14 @@ public class ShapeStyle {
     @Column(name = "deleted")
     private boolean deleted;
 
+    public ShapeStyle() {
+        this.styleId = null;
+        this.shapeId = null;
+        this.orientation = null;
+        this.fontStyle = null;
+        this.deleted = false;
+    }
+
     public ShapeStyle(Long styleId, Long shapeId, String orientation, String fontStyle) {
         this.styleId = styleId;
         this.shapeId = shapeId;

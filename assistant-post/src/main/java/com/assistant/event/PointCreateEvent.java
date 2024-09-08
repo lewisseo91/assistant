@@ -1,6 +1,8 @@
-package com.assistant.dto;
+package com.assistant.event;
 
-public class PointCreateRequest {
+import com.assistant.dto.PointCreateRequest;
+
+public class PointCreateEvent {
     private final Long pointId;
 
     private final Long shapeId;
@@ -11,16 +13,12 @@ public class PointCreateRequest {
 
     private final Long z;
 
-    public PointCreateRequest(Long pointId, Long shapeId, Long x, Long y, Long z) {
+    public PointCreateEvent(Long pointId, Long shapeId, Long x, Long y, Long z) {
         this.pointId = pointId;
         this.shapeId = shapeId;
         this.x = x;
         this.y = y;
         this.z = z;
-    }
-
-    public static PointCreateRequest create(Long pointId, Long shapeId, Long x, Long y, Long z) {
-        return new PointCreateRequest(pointId, shapeId, x, y, z);
     }
 
     public Long getPointId() {
@@ -43,7 +41,8 @@ public class PointCreateRequest {
         return z;
     }
 
-    public PointCreateRequest update(Long shapeId, PointCreateRequest pointCreateRequest) {
-        return new PointCreateRequest(pointCreateRequest.pointId, shapeId, pointCreateRequest.x, pointCreateRequest.y, pointCreateRequest.z);
+
+    public PointCreateRequest toRequest() {
+        return PointCreateRequest.create(pointId, shapeId, x, y, z);
     }
 }

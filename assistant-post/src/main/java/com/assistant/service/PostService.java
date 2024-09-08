@@ -1,7 +1,7 @@
 package com.assistant.service;
 
 import com.assistant.domain.Post;
-import com.assistant.dto.CanvasCreateRequest;
+import com.assistant.event.CanvasCreateEvent;
 import com.assistant.dto.PostCreateRequest;
 import com.assistant.dto.PostDeleteRequest;
 import com.assistant.dto.PostUpdateRequest;
@@ -33,8 +33,8 @@ public class PostService {
     }
 
     private void sendCanvasCreateRequest(PostCreateRequest postCreateRequest, Post savedPost) {
-        CanvasCreateRequest canvasCreateRequest = new CanvasCreateRequest(savedPost.getPostId(), postCreateRequest.getShapeCreateRequests());
-        applicationEventPublisher.publishEvent(canvasCreateRequest);
+        CanvasCreateEvent canvasCreateEvent = new CanvasCreateEvent(savedPost.getPostId(), postCreateRequest.getShapeCreateRequests());
+        applicationEventPublisher.publishEvent(canvasCreateEvent);
     }
 
     public void updatePost(Long id, PostUpdateRequest updatePostRequest) {

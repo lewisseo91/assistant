@@ -1,8 +1,9 @@
 package com.assistant.service;
 
 import com.assistant.domain.Shape;
-import com.assistant.dto.PointCreateRequest;
 import com.assistant.dto.ShapeCreateRequest;
+import com.assistant.event.PointCreateEvent;
+import com.assistant.event.ShapeStyleCreateEvent;
 import com.assistant.repository.ShapeRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -25,15 +26,27 @@ public class ShapeService {
         Shape savedShape = shapeRepository.save(shape);
 
         this.sendPointCreateRequest(shapeCreateRequest, savedShape);
+        this.sendShapeStyleCreateRequest(shapeCreateRequest, savedShape);
+
 
         return savedShape;
+    }
+
+    private void sendShapeStyleCreateRequest(ShapeCreateRequest shapeCreateRequest, Shape savedShape) {
+        ShapeStyleCreateEvent shapeStyleCreateEvent = new ShapeStyleCreateEvent(savedShape.getShapeId(), shapeCreateRequest.getOrientation(), shapeCreateRequest.getOrientation());
+        applicationEventPublisher.publishEvent(shapeStyleCreateEvent);
     }
 
     private void sendPointCreateRequest(ShapeCreateRequest shapeCreateRequest, Shape savedShape) {
         shapeCreateRequest.getPointCreateRequests()
                 .forEach(pointCreateRequest -> {
-                    PointCreateRequest createRequest = pointCreateRequest.update(savedShape.getShapeId(), pointCreateRequest);
-                    applicationEventPublisher.publishEvent(createRequest);
+                    PointCreateEvent createEvent = new PointCreateEvent(pointCreateRequest.getPointId(),
+                            savedShape.getShapeId(),
+                            pointCreateRequest.getX(),
+                            pointCreateRequest.getY(),
+                            pointCreateRequest.getZ());
+
+                    applicationEventPublisher.publishEvent(createEvent);
                 });
     }
 

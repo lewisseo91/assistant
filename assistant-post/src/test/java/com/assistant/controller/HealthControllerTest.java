@@ -18,8 +18,8 @@ class HealthControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    @Test
     @DisplayName("check health")
+    @Test
     public void 헬스_테스트() throws Exception {
         webTestClient.get()
                 .uri("/health/check")

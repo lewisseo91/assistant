@@ -1,8 +1,11 @@
-package com.assistant.dto;
+package com.assistant.event;
+
+import com.assistant.dto.PointCreateRequest;
+import com.assistant.dto.ShapeCreateRequest;
 
 import java.util.List;
 
-public class ShapeCreateRequest {
+public class ShapeCreateEvent {
     private final Long shapeId;
 
     private final Long canvasId;
@@ -13,16 +16,12 @@ public class ShapeCreateRequest {
 
     private final List<PointCreateRequest> pointCreateRequests;
 
-    public ShapeCreateRequest(Long shapeId, Long canvasId, String orientation, String fontStyle, List<PointCreateRequest> pointCreateRequests) {
+    public ShapeCreateEvent(Long shapeId, Long canvasId, String orientation, String fontStyle, List<PointCreateRequest> pointCreateRequests) {
         this.shapeId = shapeId;
         this.canvasId = canvasId;
         this.orientation = orientation;
         this.fontStyle = fontStyle;
         this.pointCreateRequests = pointCreateRequests;
-    }
-
-    public static ShapeCreateRequest create(Long shapeId, Long canvasId, String orientation, String fontStyle, List<PointCreateRequest> pointCreateRequests) {
-        return new ShapeCreateRequest(shapeId, canvasId, orientation, fontStyle, pointCreateRequests);
     }
 
     public Long getShapeId() {
@@ -45,7 +44,11 @@ public class ShapeCreateRequest {
         return pointCreateRequests;
     }
 
-    public ShapeCreateRequest update(Long canvasId, ShapeCreateRequest shapeCreateRequest) {
-        return new ShapeCreateRequest(shapeCreateRequest.shapeId, canvasId, shapeCreateRequest.orientation, shapeCreateRequest.fontStyle, shapeCreateRequest.pointCreateRequests);
+    public ShapeCreateEvent update(Long canvasId, ShapeCreateEvent shapeCreateRequest) {
+        return new ShapeCreateEvent(shapeCreateRequest.shapeId, canvasId, shapeCreateRequest.orientation, shapeCreateRequest.fontStyle, shapeCreateRequest.pointCreateRequests);
+    }
+
+    public ShapeCreateRequest toRequest() {
+        return ShapeCreateRequest.create(shapeId, canvasId, orientation, fontStyle, pointCreateRequests);
     }
 }
