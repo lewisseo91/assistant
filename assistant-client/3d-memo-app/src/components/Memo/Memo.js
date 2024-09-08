@@ -1,35 +1,30 @@
-// src/components/Memo/Memo.js
 import React from 'react';
 import { extend, useLoader } from '@react-three/fiber';
 import { useBox } from '@react-three/cannon';
-import { BoxGeometry, MeshStandardMaterial, TextureLoader } from 'three';
+import { BoxGeometry, MeshBasicMaterial, TextureLoader } from 'three';
 import { Text } from '@react-three/drei';
 
-extend({ BoxGeometry, MeshStandardMaterial });
+extend({ BoxGeometry, MeshBasicMaterial });
 
-function Memo({ content }) {
-  const texture = useLoader(TextureLoader, '/assets/note-texture.jpg');
+function Memo({ content, position }) {
+  const texture = useLoader(TextureLoader, '/assets/note-texture.jpg'); // 텍스처 로드
 
   const [ref] = useBox(() => ({
     type: 'Static',
-    position: [0, 0, 0],
+    position: position, // 메모 위치 설정
   }));
 
   return (
-    <mesh ref={ref} position={[0, 0, 0]} castShadow receiveShadow>
+    <mesh ref={ref} position={position}>
       <boxGeometry args={[2, 2, 0.1]} />
-      {/* 메모 박스의 밝기 조절 */}
-      <meshStandardMaterial
-        map={texture}
-      />
+      <meshBasicMaterial map={texture} />
 
-      {/* 텍스트를 별도의 mesh로 분리하여 밝기 영향 방지 */}
       <Text
         position={[0, 0, 0.2]}  // 텍스트를 박스 앞쪽에 배치
         fontSize={0.2}           // 폰트 크기 설정
-        color="white"            // 텍스트 색상을 흰색으로 유지
-        anchorX="center"         // 텍스트를 중심에 맞춤
-        anchorY="middle"
+        color="black"            // 텍스트 색상
+        anchorX="center"         // 텍스트의 수평 기준점
+        anchorY="middle"         // 텍스트의 수직 기준점
       >
         {content}
       </Text>
